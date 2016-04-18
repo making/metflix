@@ -33,5 +33,13 @@
            -d dependencies=actuator,cloud-config-server \
            -d applicationName=ConfigServerApplication | tar -xzvf -
 
+    curl start.spring.io/starter.tgz \
+           -d groupId=com.metflix \
+           -d artifactId=eureka-server \
+           -d packageName=com.metflix \
+           -d baseDir=eureka-server \
+           -d dependencies=actuator,cloud-config-client,cloud-eureka-server \
+           -d applicationName=EurekaServerApplication | tar -xzvf -
+
     curl -XPOST http://localhost:4444/api/members -H 'Content-Type: application/json' -d '{"user":"Taro", "age" : 20}'
     curl http://localhost:4444/api/members/making
