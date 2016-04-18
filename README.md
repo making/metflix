@@ -41,5 +41,13 @@
            -d dependencies=actuator,cloud-config-client,cloud-eureka-server \
            -d applicationName=EurekaServerApplication | tar -xzvf -
 
+    curl start.spring.io/starter.tgz \
+           -d groupId=com.metflix \
+           -d artifactId=hystrix-dashboard \
+           -d packageName=com.metflix \
+           -d baseDir=hystrix-dashboard \
+           -d dependencies=actuator,cloud-config-client,cloud-hystrix-dashboard \
+           -d applicationName=HystrixDashboardApplication | tar -xzvf -
+
     curl -XPOST http://localhost:4444/api/members -H 'Content-Type: application/json' -d '{"user":"Taro", "age" : 20}'
     curl http://localhost:4444/api/members/making
