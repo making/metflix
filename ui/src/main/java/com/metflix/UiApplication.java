@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.RequestEntity;
@@ -48,9 +49,13 @@ public class UiApplication extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and()
+                .csrf().ignoringAntMatchers("/env**", "/refresh**")
+                .and()
                 .authorizeRequests()
+                .antMatchers("/env**", "/refresh**").permitAll()
                 .antMatchers("**").authenticated()
-                .and().addFilterBefore(new RequestDumperFilter(), ChannelProcessingFilter.class);
+                .and()
+                .addFilterBefore(new RequestDumperFilter(), ChannelProcessingFilter.class);
     }
 
     @Override
@@ -64,11 +69,14 @@ class Movie {
 }
 
 @Controller
+@RefreshScope
 class HomeController {
     @Autowired
     RestTemplate restTemplate;
     @Value("${recommendation.api:http://localhost:3333}")
     URI recommendationApi;
+    @Value("${message:Welcome to Metflix!}")
+    String message;
 
     @RequestMapping("/")
     String home(Principal principal, Model model) {
@@ -76,6 +84,7 @@ class HomeController {
                 .pathSegment("api", "recommendations", principal.getName())
                 .build().toUri()).build(), new ParameterizedTypeReference<List<Movie>>() {
         }).getBody();
+        model.addAttribute("message", message);
         model.addAttribute("username", principal.getName());
         model.addAttribute("recommendations", recommendations);
         return "index";
