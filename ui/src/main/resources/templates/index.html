@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<h1 style="color:forestgreen">METFLIX</h1>
+<p>hello! <span th:text="${username}">john</span></p>
+<h2>Recommendations</h2>
+<ul>
+    <li th:each="recommendation : ${recommendations}"
+        th:text="${recommendation.title}"></li>
+</ul>
+</body>
+</html>
