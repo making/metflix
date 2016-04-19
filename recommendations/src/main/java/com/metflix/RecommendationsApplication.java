@@ -16,7 +16,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @SpringBootApplication
 public class RecommendationsApplication {
@@ -58,13 +57,6 @@ class RecommendationsController {
         if (member == null)
             throw new UserNotFoundException();
         return member.age < 17 ? kidRecommendations : adultRecommendations;
-    }
-
-    /**
-     * Should be safe for all audiences
-     */
-    List<Movie> recommendationFallback(String user) {
-        return familyRecommendations;
     }
 }
 
