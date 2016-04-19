@@ -1,7 +1,0 @@
-applications:
-- name: hystrix-dashboard
-  buildpack: java_buildpack
-  memory: 340M
-  path: target/hystrix-dashboard-0.0.1-SNAPSHOT.jar
-  services:
-    - config-server

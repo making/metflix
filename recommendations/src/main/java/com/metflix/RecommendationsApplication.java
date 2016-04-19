@@ -32,11 +32,11 @@ public class RecommendationsApplication {
         SpringApplication.run(RecommendationsApplication.class, args);
     }
 
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+//    @Bean
+//    @LoadBalanced
+//    RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
 
     @Bean
     RequestDumperFilter requestDumperFilter() {

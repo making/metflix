@@ -1,14 +1,14 @@
 #!/bin/sh
 
 suffix=tmaki
-domain=cfapps.io
+domain=cfapps.pez.pivotal.io
+git_url=https://github.com/making/metflix-config
+git_label=spring-cloud-services
 
-dir="$dir config-server"
-dir="$dir eureka-server"
 dir="$dir membership"
 dir="$dir recommendations"
 dir="$dir ui"
-dir="$dir hystrix-dashboard"
 
 service="$service config-server"
 service="$service eureka-server"
+service="$service hystrix-dashboard"

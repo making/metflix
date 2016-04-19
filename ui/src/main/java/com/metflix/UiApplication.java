@@ -43,11 +43,11 @@ public class UiApplication extends WebSecurityConfigurerAdapter {
         SpringApplication.run(UiApplication.class, args);
     }
 
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+//    @Bean
+//    @LoadBalanced
+//    RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
 
 
     @Autowired
@@ -57,8 +57,7 @@ public class UiApplication extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and()
-                .csrf().ignoringAntMatchers("/env**", "/refresh**")
-                .and()
+                .csrf().disable()//.ignoringAntMatchers("/env**", "/refresh**")
                 .authorizeRequests()
                 .antMatchers("/env**", "/refresh**", "/hystrix**").permitAll()
                 .antMatchers("**").authenticated()
