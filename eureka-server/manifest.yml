@@ -1,0 +1,7 @@
+applications:
+- name: eureka-server
+  buildpack: java_buildpack
+  memory: 358M
+  path: target/eureka-server-0.0.1-SNAPSHOT.jar
+  services:
+    - config-server

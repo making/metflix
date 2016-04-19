@@ -1,0 +1,5 @@
+applications:
+- name: config-server
+  buildpack: java_buildpack
+  memory: 340M
+  path: target/config-server-0.0.1-SNAPSHOT.jar
