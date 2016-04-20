@@ -21,7 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 @SpringBootApplication
 @EnableDiscoveryClient
