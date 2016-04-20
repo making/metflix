@@ -1,6 +1,7 @@
 package com.metflix;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.apache.catalina.filters.RequestDumperFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -100,7 +101,8 @@ class RecommendationService {
     @Value("${recommendation.api:http://localhost:3333}")
     URI recommendationApi;
 
-    @HystrixCommand(fallbackMethod = "getRecommendationsFallback")
+    @HystrixCommand(fallbackMethod = "getRecommendationsFallback",
+            commandProperties = @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000"))
     public List<Movie> getRecommendations(String username) {
         return restTemplate.exchange(RequestEntity.get(UriComponentsBuilder.fromUri(recommendationApi)
                 .pathSegment("api", "recommendations", username)
