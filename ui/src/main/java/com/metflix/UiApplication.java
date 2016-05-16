@@ -12,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.RequestEntity;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -44,11 +45,12 @@ public class UiApplication extends WebSecurityConfigurerAdapter {
         SpringApplication.run(UiApplication.class, args);
     }
 
-//    @Bean
-//    @LoadBalanced
-//    RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
+    @Profile("!cloud") // why?
+    @Bean
+    @LoadBalanced
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 
     @Autowired
@@ -58,7 +60,8 @@ public class UiApplication extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and()
-                .csrf().disable()//.ignoringAntMatchers("/env**", "/refresh**")
+                .csrf().ignoringAntMatchers("/env**", "/refresh**")
+                .and()
                 .authorizeRequests()
                 .antMatchers("/env**", "/refresh**", "/hystrix**").permitAll()
                 .antMatchers("**").authenticated()
