@@ -1,8 +1,9 @@
 applications:
 - name: ui
   buildpack: java_buildpack
-  memory: 450M
+  memory: 768M
   path: target/ui-0.0.1-SNAPSHOT.jar
   services:
     - config-server
     - eureka-server
+    - zipkin-server

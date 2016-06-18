@@ -1,7 +1,7 @@
 applications:
-- name: hystrix-dashboard
+- name: zipkin-server
   buildpack: java_buildpack
   memory: 768M
-  path: target/hystrix-dashboard-0.0.1-SNAPSHOT.jar
+  path: target/zipkin-server-0.0.1-SNAPSHOT.jar
   services:
     - config-server
