@@ -29,6 +29,9 @@ done
 
 cf services
 
+echo "Wait 1 min for all services to be initialized"
+sleep 60
+
 echo "Deploy applications"
 
 for d in $dir;do
